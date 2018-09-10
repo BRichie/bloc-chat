@@ -28,15 +28,32 @@ componentDidMount() {
 render() {
     console.log(this.state.rooms)
     return (
-            <div className="chatTitle">
             
+            
+            <div className="chatTitle">
             <h1 id="title"> {this.state.title} </h1>
             
-        
-</div>
-);
-}
-}
+             
+             <div className="roomList">
+             
+             <ul>
+    
+              {
+                this.state.rooms.map((val,index)=>{
+                  return <li key={index}>{val.name}</li>
+                })
+    
+              }
+              
+              </ul>
+            </div>
+            </div>
+        );
+      }
+    }
+
+
+
     
 
 export default RoomList;
