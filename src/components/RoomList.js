@@ -33,9 +33,9 @@ render() {
             <h1 id="title"> {this.state.rooms.title} </h1>
             <div id="room-list">{this.state.rooms.map( room )} </div>
         
-</div>
-);
-}
+            </div>
+        );
+    }
 }
     
 
