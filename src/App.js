@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
+
 var config = {
-  apiKey: "AIzaSyAMEn5NgJhXgjjDOTs9L7CEVWiZ-AWsSgs",
-  authDomain: "bloc-chat-ff3d0.firebaseapp.com",
-  databaseURL: "https://bloc-chat-ff3d0.firebaseio.com",
-  projectId: "bloc-chat-ff3d0",
-  storageBucket: "bloc-chat-ff3d0.appspot.com",
-  messagingSenderId: "259293635568"
+  apiKey: "AIzaSyAdXr_e7MRDet3EIY6PFloMz7cIbgFIt9U",
+  authDomain: "new-bloc-chat-8284c.firebaseapp.com",
+  databaseURL: "https://new-bloc-chat-8284c.firebaseio.com",
+  projectId: "new-bloc-chat-8284c",
+  storageBucket: "new-bloc-chat-8284c.appspot.com",
+  messagingSenderId: "1079208063451"
 };
 firebase.initializeApp(config);
 
