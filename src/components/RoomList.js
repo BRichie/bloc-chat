@@ -8,6 +8,7 @@ class RoomList extends Component {
         this.state = {
             rooms: [],
             title: "Bloc Chat",
+            
          }
         this.roomsRef = this.props.firebase.database().ref('rooms');
     }
@@ -19,10 +20,21 @@ componentDidMount() {
         this.setState({ rooms: this.state.rooms.concat( room ) });
        //console.log(snapshot.val()); 
        });
-   
-    
+   }
+createRoom(newRoomName) {
+    this.roomsRef.push({
+        name: newRoomName
+      });
 }
+handleChange(event) {
+    this.setState({newRoomName: event.target.value});
+  }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({name: this.state.value});
+    this.state.value = ""
+  }
 
 render() {
     //console.log(this.state.rooms)
@@ -41,10 +53,20 @@ render() {
             })
 
           }
-          
           </ul>
+          </div>
+          <div className="room-submit">
+          <form  onSubmit={ (e) => { e.preventDefault(); this.createRoom(this.state.newRoomName) } }>
+            <label>
+              Create New Room:
+              <input type="text" value={this.state.newRoomName} onChange={ this.handleChange.bind(this) } />
+            </label>
+            <input type="submit" value="Add"/>
+          </form>
+          {this.state.data}
         </div>
-        </div>
+    
+    </div>
              
            
         );
