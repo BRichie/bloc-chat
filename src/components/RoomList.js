@@ -8,7 +8,7 @@ class RoomList extends Component {
         this.state = {
             rooms: [],
             title: "Bloc Chat",
-            
+            newRoomName: '',
          }
         this.roomsRef = this.props.firebase.database().ref('rooms');
     }
@@ -25,6 +25,7 @@ createRoom(newRoomName) {
     this.roomsRef.push({
         name: newRoomName
       });
+      this.setState({ newRoomName: ''});
 }
 handleChange(event) {
     this.setState({newRoomName: event.target.value});
@@ -34,7 +35,8 @@ handleChange(event) {
     event.preventDefault();
     this.setState({name: this.state.value});
     this.state.value = ""
-  }
+  };
+  
 
 render() {
     //console.log(this.state.rooms)

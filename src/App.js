@@ -3,6 +3,7 @@ import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
 
+
 var config = {
   apiKey: "AIzaSyAdXr_e7MRDet3EIY6PFloMz7cIbgFIt9U",
   authDomain: "new-bloc-chat-8284c.firebaseapp.com",
@@ -19,6 +20,7 @@ class App extends Component {
     return (
       <div className="App">
       < RoomList firebase={firebase}/>
+     
        </div>
     );
   }
