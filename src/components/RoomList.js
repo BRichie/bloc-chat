@@ -18,22 +18,22 @@ componentDidMount() {
         const room = snapshot.val();
         room.key = snapshot.key;
         this.setState({ rooms: this.state.rooms.concat( room ) });
-       //console.log(snapshot.val()); 
+       if (this.state.rooms.length === 1) {this.props.setRoom (room)} 
        });
    }
 createRoom(newRoomName) {
     this.roomsRef.push({
         name: newRoomName
       });
-      this.setState({ newRoomName: ''});
+      this.setState({ newRoomName: '' });
 }
 handleChange(event) {
-    this.setState({newRoomName: event.target.value});
+    this.setState({newRoomName: event.target.value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({name: this.state.value});
+    this.setState({ name: this.state.value });
     this.state.value = ""
   };
   
@@ -49,22 +49,24 @@ render() {
             <div className="roomList">
          <ul>
 
-          {
-            this.state.rooms.map((val,index)=>{
-              return <li key={index}>{val.name}</li>
-            })
+          {this.state.rooms.map( room =>
+              <li key={room.key}>
+              <button onClick={ () => this.props.setRoom( room )}> {room.name}</button>
+         
+          </li>
 
-          }
+        )} 
           </ul>
+          
           </div>
-          <div className="room-submit">
-          <form  onSubmit={ (e) => { e.preventDefault(); this.createRoom(this.state.newRoomName) } }>
+    <div className="room-submit">
+        <form  onSubmit={ (e) => { e.preventDefault(); this.createRoom(this.state.newRoomName) } }>
             <label>
-              Create New Room:
-              <input type="text" value={this.state.newRoomName} onChange={ this.handleChange.bind(this) } />
+                Create New Room:
+              <input type="text" value={ this.state.newRoomName } onChange={ this.handleChange.bind(this) } />
             </label>
             <input type="submit" value="Add"/>
-          </form>
+        </form>
           {this.state.data}
         </div>
     
