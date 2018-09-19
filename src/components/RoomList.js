@@ -28,7 +28,7 @@ createRoom(newRoomName) {
       this.setState({ newRoomName: '' });
 }
 handleChange(event) {
-    this.setState({newRoomName: event.target.value });
+    this.setState({ newRoomName: event.target.value });
   }
 
   handleSubmit(event) {

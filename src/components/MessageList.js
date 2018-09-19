@@ -5,8 +5,9 @@ class MessageList extends Component {
         super(props);
 
         this.state = { 
-            newMessages:'',
-            displayedMessages: []
+            displayedMessages:  [],
+            newMessages: ''
+            
 
         }
         this.messagesRef = this.props.firebase.database().ref( 'messages' );
@@ -17,7 +18,7 @@ class MessageList extends Component {
                 const message = snapshot.val();
                 message.key = snapshot.key;
                 this.setState({ messages: this.state.displayedMessages.concat( message ) });
-               console.log(snapshot.val()); 
+               //console.log(snapshot.val()); 
                });
            }
 
@@ -25,9 +26,9 @@ class MessageList extends Component {
                if (!this.props.activeRoom || !newMessages) { return }
                this.messagesRef.push({
                 username: "<username>",
-                content: this.state.newMessages,
+                content: newMessages,
                 sentAt: "<timestamp>",
-                roomId: this.props.activeRoom,
+                roomId: this.props.activeRoom.key,
                });
                this.setState({ newMessages: ''});
             }
@@ -49,10 +50,10 @@ render () {
         <div id="room-component">
         <h3 className="chat-room"> {this.props.activeRoom ? this.props.activeRoom.name : ''}</h3>
         
-        <ul>
+        
         {this.state.displayedMessages.map( message =>
-        <li key={message.key}> 
-        <button onClick={ () => this.props.createMessage( message )}> {message.content}</button>
+        <li key={message.key}>{message.content} 
+        
          </li>
         )}
    
@@ -69,7 +70,7 @@ render () {
         </form>
         {this.state.data} 
      </div>
-        </ul>
+        
      </div>
     );
   }
