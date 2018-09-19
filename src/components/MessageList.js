@@ -26,7 +26,7 @@ class MessageList extends Component {
                if (!this.props.activeRoom || !newMessages) { return }
                this.messagesRef.push({
                 username: "<username>",
-                content: newMessages,
+                content: this.state.newMessages,
                 sentAt: "<timestamp>",
                 roomId: this.props.activeRoom.key,
                });
@@ -36,11 +36,6 @@ class MessageList extends Component {
                this.setState({ newMessages: event.target.value });
            }
             
-           handleSubmit(event) {
-              event.preventDefault();
-              this.setState({ content: this.state.value });
-              this.state.value = ""
-          };
         
         
     
@@ -50,28 +45,29 @@ render () {
         <div id="room-component">
         <h3 className="chat-room"> {this.props.activeRoom ? this.props.activeRoom.name : ''}</h3>
         
-        
-        {this.state.displayedMessages.map( message =>
-        <li key={message.key}>{message.content} 
-        
+        <ul id="sent-messages">
+        {this.state.displayedMessages.map( message  =>
+        <li key={message.key}>
+        <div className="content">
+        {message.content}
+        </div>
          </li>
         )}
    
-    
+    </ul>
 
      <div className="message-box">
         
         <form onSubmit={ (e) => { e.preventDefault(); this.createMessage(this.state.newMessages) } } >
             <label>        
               Type Message:
-              <input type="text" value={ this.state.newMessages } onChange={this.handleChange.bind(this) } />
+              <input type="text" value={ this.state.newMessages } onChange={this.handleChange.bind(this) } name="newMessages" />
             </label>
             <input type="submit" />
         </form>
-        {this.state.data} 
+         
      </div>
-        
-     </div>
+    </div>
     );
   }
 }
