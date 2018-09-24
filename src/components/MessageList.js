@@ -8,6 +8,7 @@ class MessageList extends Component {
             displayedMessages:  [],
             newMessages: '',
             roomId: '',
+            username: ''
             
 
         }
@@ -31,7 +32,7 @@ class MessageList extends Component {
            createMessage(newMessages) {
                if (!this.props.activeRoom || !newMessages ) { return }
                this.messagesRef.push({
-                username: "<username>",
+                username: this.props.user ? this.props.user.displayName : "Guest",
                 content: newMessages,
                 sentAt: "<timestamp>",
                 roomId: this.props.activeRoom.key,
@@ -61,6 +62,7 @@ render () {
               <div key={message.key}>
                 <div className="content">
                 <p>{message.content}</p>
+                <p>{message.username}</p>
                </div>
             </div>
             )}
