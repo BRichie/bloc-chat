@@ -68,10 +68,7 @@ render () {
             )}
         </ul>
         
-   
-   
-
-     <div className="message-box">
+        <div className="message-box">
         
         <form onSubmit = { (e) => { e.preventDefault(); this.createMessage(this.state.newMessages) } }>
             <label>        
