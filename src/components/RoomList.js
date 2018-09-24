@@ -44,21 +44,19 @@ render() {
             
             <div className="chatTitle">
             <h1 id="title"> {this.state.title} </h1>
-            
-    
-            <div className="roomList">
+             <div className="roomList">
          <ul>
 
           {this.state.rooms.map( room =>
               <li key={room.key}>
               <button onClick={ () => this.props.setRoom( room )}> {room.name}</button>
          
-          </li>
+              </li>
 
         )} 
           </ul>
           
-          </div>
+            </div>
     <div className="room-submit">
         <form  onSubmit={ (e) => { e.preventDefault(); this.createRoom(this.state.newRoomName) } }>
             <label>

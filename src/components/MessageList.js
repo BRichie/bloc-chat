@@ -5,72 +5,83 @@ class MessageList extends Component {
         super(props);
 
         this.state = { 
-            newMessages:'',
-            displayedMessages: []
+            displayedMessages:  [],
+            newMessages: '',
+            roomId: '',
+            
 
         }
         this.messagesRef = this.props.firebase.database().ref( 'messages' );
     }
+   
 
         componentDidMount() {
             this.messagesRef.on('child_added', snapshot => {
                 const message = snapshot.val();
                 message.key = snapshot.key;
-                this.setState({ messages: this.state.displayedMessages.concat( message ) });
-               console.log(snapshot.val()); 
+                this.setState({ displayedMessages: this.state.displayedMessages.concat( message ) });
+               //console.log(snapshot.val()); 
                });
-           }
+           
+                
+          
+         }
+           
 
            createMessage(newMessages) {
-               if (!this.props.activeRoom || !newMessages) { return }
+               if (!this.props.activeRoom || !newMessages ) { return }
                this.messagesRef.push({
                 username: "<username>",
-                content: this.state.newMessages,
+                content: newMessages,
                 sentAt: "<timestamp>",
-                roomId: this.props.activeRoom,
+                roomId: this.props.activeRoom.key,
                });
                this.setState({ newMessages: ''});
             }
-           handleChange(event) {
-               this.setState({ newMessages: event.target.value });
-           }
+            handleChange(event) {
+                this.setState({ newMessages: event.target.value });
+            }
             
            handleSubmit(event) {
-              event.preventDefault();
-              this.setState({ content: this.state.value });
-              this.state.value = ""
+            event.preventDefault();
+            this.setState({ newMessages: this.state.value });
+            this.state.value = ""
           };
-        
         
     
 
 render () {
+   
+    //console.log(this.state.displayedMessages)
     return (
         <div id="room-component">
-        <h3 className="chat-room"> {this.props.activeRoom ? this.props.activeRoom.name : ''}</h3>
+            <h3 className="chat-room"> {this.props.activeRoom ? this.props.activeRoom.name : ''}</h3>
+        <ul id="message-list">
+            {this.state.displayedMessages.filter( message => message.roomId === this.props.activeRoom.key).map(( message) =>
+              <div key={message.key}>
+                <div className="content">
+                <p>{message.content}</p>
+               </div>
+            </div>
+            )}
+        </ul>
         
-        <ul>
-        {this.state.displayedMessages.map( message =>
-        <li key={message.key}> 
-        <button onClick={ () => this.props.createMessage( message )}> {message.content}</button>
-         </li>
-        )}
    
-    
+   
 
      <div className="message-box">
         
-        <form onSubmit={ (e) => { e.preventDefault(); this.createMessage(this.state.newMessages) } } >
+        <form onSubmit = { (e) => { e.preventDefault(); this.createMessage(this.state.newMessages) } }>
             <label>        
               Type Message:
-              <input type="text" value={ this.state.newMessages } onChange={this.handleChange.bind(this) } />
+              <input type="text" value= { this.state.newMessages } onChange={this.handleChange.bind(this) } />
             </label>
             <input type="submit" />
         </form>
-        {this.state.data} 
+         
      </div>
-        </ul>
-     </div>
+     
+    </div>
     );
   }
 }
@@ -79,12 +90,4 @@ render () {
     
 
 
-
-
-
-
-
-
-
-
-        export default MessageList;
+ export default MessageList;
