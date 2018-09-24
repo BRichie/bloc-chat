@@ -6,12 +6,8 @@ class MessageList extends Component {
 
         this.state = { 
             displayedMessages:  [],
-<<<<<<< HEAD
-            newMessages: ''
-=======
             newMessages: '',
             roomId: '',
->>>>>>> checkpoint-4-messages
             
 
         }
@@ -23,11 +19,7 @@ class MessageList extends Component {
             this.messagesRef.on('child_added', snapshot => {
                 const message = snapshot.val();
                 message.key = snapshot.key;
-<<<<<<< HEAD
-                this.setState({ messages: this.state.displayedMessages.concat( message ) });
-=======
                 this.setState({ displayedMessages: this.state.displayedMessages.concat( message ) });
->>>>>>> checkpoint-4-messages
                //console.log(snapshot.val()); 
                });
            
@@ -50,14 +42,11 @@ class MessageList extends Component {
                 this.setState({ newMessages: event.target.value });
             }
             
-<<<<<<< HEAD
-=======
            handleSubmit(event) {
             event.preventDefault();
             this.setState({ newMessages: this.state.value });
             this.state.value = ""
           };
->>>>>>> checkpoint-4-messages
         
     
 
@@ -77,41 +66,21 @@ render () {
             )}
         </ul>
         
-<<<<<<< HEAD
-        <ul id="sent-messages">
-        {this.state.displayedMessages.map( message  =>
-        <li key={message.key}>
-        <div className="content">
-        {message.content}
-        </div>
-         </li>
-        )}
-   
-    </ul>
-=======
    
    
->>>>>>> checkpoint-4-messages
 
      <div className="message-box">
         
         <form onSubmit = { (e) => { e.preventDefault(); this.createMessage(this.state.newMessages) } }>
             <label>        
               Type Message:
-<<<<<<< HEAD
-              <input type="text" value={ this.state.newMessages } onChange={this.handleChange.bind(this) } name="newMessages" />
-=======
               <input type="text" value= { this.state.newMessages } onChange={this.handleChange.bind(this) } />
->>>>>>> checkpoint-4-messages
             </label>
             <input type="submit" />
         </form>
          
      </div>
-<<<<<<< HEAD
-=======
      
->>>>>>> checkpoint-4-messages
     </div>
     );
   }

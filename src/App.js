@@ -21,11 +21,7 @@ class App extends Component {
   super(props);
 
   this.state = {
-<<<<<<< HEAD
-    activeRoom: "",
-=======
     activeRoom: '',
->>>>>>> checkpoint-4-messages
   };
   
   }
@@ -39,11 +35,7 @@ class App extends Component {
     return (
       <div className="App">
       < RoomList firebase={firebase} activeRoom={this.state.activeRoom} setRoom={this.setRoom.bind(this)} />
-<<<<<<< HEAD
-      < MessageList firebase={firebase} activeRoom={this.state.activeRoom}  />
-=======
       < MessageList firebase={firebase} activeRoom={this.state.activeRoom} setRoom={this.state.activeRoom.key} />
->>>>>>> checkpoint-4-messages
        </div>
     );
   }
